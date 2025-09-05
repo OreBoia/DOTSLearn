@@ -83,15 +83,33 @@ public class FindNearest : MonoBehaviour
         }
 
         // To schedule a job, we first need to create an instance and populate its fields.
-        FindNearestJob findJob = new FindNearestJob
+        // FindNearestJob findJob = new FindNearestJob
+        // {
+        //     TargetPositions = TargetPositions,
+        //     SeekerPositions = SeekerPositions,
+        //     NearestTargetPosition = NearestTargetPositions
+        // };
+
+        // This job processes every seeker, so the
+        // seeker array length is used as the index count.
+        // A batch size of 100 is semi-arbitrarily chosen here 
+        // simply because it's not too big but not too small.
+        FindNearestJobParallel findJob = new FindNearestJobParallel
         {
             TargetPositions = TargetPositions,
             SeekerPositions = SeekerPositions,
-            NearestTargetPosition = NearestTargetPositions
+            NearestTargetPositions = NearestTargetPositions
         };
 
         // Schedule() puts the job instance on the job queue.
-        JobHandle findHandle = findJob.Schedule();
+        // JobHandle findHandle = findJob.Schedule();
+
+        // This job processes every seeker, so the
+        // seeker array length is used as the index count.
+        // A batch size of 100 is semi-arbitrarily chosen here 
+        // simply because it's not too big but not too small.
+        JobHandle findHandle = findJob.Schedule(SeekerPositions.Length, 100);
+
 
         // The Complete method will not return until the job represented by
         // the handle finishes execution. Effectively, the main thread waits

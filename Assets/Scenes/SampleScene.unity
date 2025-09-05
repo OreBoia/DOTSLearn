@@ -507,8 +507,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Spawner
   TargetPrefab: {fileID: 6647670319398726050, guid: 5a696cf8e47c2fc47858d103d2fe01a3, type: 3}
   SeekerPrefab: {fileID: 5933183362872104588, guid: 3e797f7c0c9090f4da7ba5c1a0390854, type: 3}
-  NumTargets: 1000
-  NumSeekers: 1000
+  NumTargets: 10000
+  NumSeekers: 10000
   Bounds: {x: 500, y: 500}
 --- !u!4 &1837786441
 Transform:
