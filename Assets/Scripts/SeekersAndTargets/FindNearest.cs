@@ -90,6 +90,10 @@ public class FindNearest : MonoBehaviour
         //     NearestTargetPosition = NearestTargetPositions
         // };
 
+        //Sorting of TargetPoistions by X
+        SortJob<float3, AxisXcomparer> sortJob = TargetPositions.SortJob(new AxisXcomparer { });
+        JobHandle sortHandle = sortJob.Schedule();
+
         // This job processes every seeker, so the
         // seeker array length is used as the index count.
         // A batch size of 100 is semi-arbitrarily chosen here 
@@ -102,13 +106,23 @@ public class FindNearest : MonoBehaviour
         };
 
         // Schedule() puts the job instance on the job queue.
+        
         // JobHandle findHandle = findJob.Schedule();
 
         // This job processes every seeker, so the
         // seeker array length is used as the index count.
         // A batch size of 100 is semi-arbitrarily chosen here 
         // simply because it's not too big but not too small.
-        JobHandle findHandle = findJob.Schedule(SeekerPositions.Length, 100);
+
+        // JobHandle findHandle = findJob.Schedule(SeekerPositions.Length, 100);
+
+        // By passing the sort job handle to Schedule(), the find job will depend
+        // upon the sort job, meaning the find job will not start executing until 
+        // after the sort job has finished.
+        // The find nearest job needs to wait for the sorting, 
+        // so it must depend upon the sorting jobs. 
+
+        JobHandle findHandle = findJob.Schedule(SeekerPositions.Length, 100, sortHandle);
 
 
         // The Complete method will not return until the job represented by
