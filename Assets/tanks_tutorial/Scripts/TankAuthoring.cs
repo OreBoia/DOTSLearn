@@ -1,11 +1,11 @@
-﻿using Unity.Entities;
+using Unity.Entities;
 using UnityEngine;
 
 public class TankAuthoring : MonoBehaviour
 {
     public GameObject Turret;
     public GameObject Cannon;
-    
+
     class Baker : Baker<TankAuthoring>
     {
         public override void Bake(TankAuthoring authoring)
@@ -15,15 +15,14 @@ public class TankAuthoring : MonoBehaviour
             AddComponent(entity, new Tank
             {
                 Turret = GetEntity(authoring.Turret, TransformUsageFlags.Dynamic),
-                Cannon = GetEntity(authoring.Cannon, TransformUsageFlags.Dynamic)
+                Cannon = GetEntity(authoring.Turret, TransformUsageFlags.Dynamic)
             });
         }
     }
 }
 
-// A component that will be added to the root entity of every tank.
 public struct Tank : IComponentData
 {
     public Entity Turret;
     public Entity Cannon;
-} 
+}

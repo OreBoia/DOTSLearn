@@ -1,4 +1,4 @@
-﻿using Unity.Entities;
+using Unity.Entities;
 using UnityEngine;
 
 public class ConfigAuthoring : MonoBehaviour
@@ -13,18 +13,21 @@ public class ConfigAuthoring : MonoBehaviour
         {
             // The config entity itself doesn’t need transform components,
             // so we use TransformUsageFlags.None
+
             var entity = GetEntity(authoring, TransformUsageFlags.None);
             AddComponent(entity, new Config
             {
                 // Bake the prefab into entities. GetEntity will return the 
                 // root entity of the prefab hierarchy.
+
                 TankPrefab = GetEntity(authoring.TankPrefab, TransformUsageFlags.Dynamic),
                 CannonBallPrefab = GetEntity(authoring.CannonBallPrefab, TransformUsageFlags.Dynamic),
-                TankCount = authoring.TankCount,
+                TankCount = authoring.TankCount
             });
         }
     }
 }
+
 public struct Config : IComponentData
 {
     public Entity TankPrefab;
