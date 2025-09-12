@@ -13,7 +13,7 @@ public partial struct TankMovementSystem : ISystem
         // For each entity having a LocalTransform and Tank component, 
         // we access the LocalTransform and entity ID.
 
-        foreach (var (transform, entity) in SystemAPI.Query<RefRW<LocalTransform>>().WithAll<Tank>().WithEntityAccess())
+        foreach (var (transform, entity) in SystemAPI.Query<RefRW<LocalTransform>>().WithAll<Tank>().WithNone<Player>().WithEntityAccess())
         {
             var pos = transform.ValueRO.Position;
 
