@@ -66,5 +66,6 @@
     "explorer.fileNesting.patterns": {
         "*.sln": "*.csproj",
     },
-    "dotnet.defaultSolution": "DOTSLearn.sln"
+    "dotnet.defaultSolution": "DOTSLearn.sln",
+    "dotnet.preferCSharpExtension": true
 }

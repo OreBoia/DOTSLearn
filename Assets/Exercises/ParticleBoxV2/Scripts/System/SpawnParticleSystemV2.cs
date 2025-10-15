@@ -5,11 +5,12 @@ using Unity.Collections;
 using Unity.Entities;
 using Unity.Mathematics;
 using Unity.Transforms;
+using UnityEngine;
 using Random = Unity.Mathematics.Random;
 
 namespace Exercises.ParticleBoxV2.Scripts.System
 {
-    public partial struct SpawnParticleSystem : ISystem
+    public partial struct SpawnParticleSystemV2 : ISystem
     {
         [BurstCompile]
         public void OnCreate(ref SystemState state)
@@ -22,7 +23,7 @@ namespace Exercises.ParticleBoxV2.Scripts.System
         {
             var settings = SystemAPI.GetSingleton<SpawnConfigV2>();
             var bounds = SystemAPI.GetSingleton<Bounds>();
-            var setupEntitny = SystemAPI.GetSingletonEntity<SpawnConfigV2>();
+            var singletonEntity = SystemAPI.GetSingletonEntity<SpawnConfigV2>();
 
             var ecb = new EntityCommandBuffer(Allocator.Temp);
 
@@ -51,6 +52,8 @@ namespace Exercises.ParticleBoxV2.Scripts.System
             
             ecb.Playback(state.EntityManager);
             ecb.Dispose();
+
+            state.Enabled = false;
         }
 
         [BurstCompile]

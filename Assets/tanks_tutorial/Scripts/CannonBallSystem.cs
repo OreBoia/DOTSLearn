@@ -6,6 +6,15 @@ using UnityEngine;
 
 public partial struct CannonBallSystem : ISystem
 {
+    /// <summary>
+    /// Schedules a job to update cannonball entities each frame.
+    /// </summary>
+    /// <param name="state">A reference to the current system's state, used to get system singletons and world data.</param>
+    /// <remarks>
+    /// This method retrieves an <see cref="EntityCommandBuffer"/> from the <see cref="EndSimulationEntityCommandBufferSystem"/>.
+    /// It then creates and schedules a <see cref="CannonBallJob"/>, passing the command buffer and delta time.
+    /// The job will handle the logic for moving cannonballs and destroying them when their lifetime expires.
+    /// </remarks>
     [BurstCompile]
     public void OnUpdate(ref SystemState state)
     {

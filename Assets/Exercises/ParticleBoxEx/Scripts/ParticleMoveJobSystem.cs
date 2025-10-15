@@ -8,13 +8,20 @@ namespace Exercises.ParticleBoxEx.Scripts
         [BurstCompile]
         public void OnCreate(ref SystemState state)
         {
-            
         }
 
         [BurstCompile]
         public void OnUpdate(ref SystemState state)
         {
-
+            // float dt = SystemAPI.Time.DeltaTime;
+            //
+            // var b = SystemAPI.GetSingleton<Bounds>();
+            // var job = new MoveJob
+            // {
+            //     dt = dt,
+            //     bounds = b,
+            // };
+            // job.ScheduleParallel();
         }
 
         [BurstCompile]

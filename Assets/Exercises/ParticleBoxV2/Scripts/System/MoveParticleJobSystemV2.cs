@@ -3,12 +3,12 @@ using Unity.Entities;
 
 namespace Exercises.ParticleBoxV2.Scripts.System
 {
-    public partial struct MoveParticleJobSystem : ISystem
+    public partial struct MoveParticleJobSystemV2 : ISystem
     {
         [BurstCompile]
         public void OnCreate(ref SystemState state)
         {
-            
+            state.RequireForUpdate<Bounds>();
         }
 
         [BurstCompile]

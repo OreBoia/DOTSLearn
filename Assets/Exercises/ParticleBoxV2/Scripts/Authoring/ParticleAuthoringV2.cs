@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace Exercises.ParticleBoxV2.Scripts.Authoring
 {
-    public class ParticleAuthoring : MonoBehaviour
+    public class ParticleAuthoringV2 : MonoBehaviour
     {
         public GameObject ParticlePrefab;
         public int Count = 500;
@@ -14,25 +14,25 @@ namespace Exercises.ParticleBoxV2.Scripts.Authoring
         public float SpeedMin = 1f;
         public float SpeedMax = 5f;
         
-        private class ParticleAuthoringBaker : Baker<ParticleAuthoring>
+        private class ParticleAuthoringBaker : Baker<ParticleAuthoringV2>
         {
-            public override void Bake(ParticleAuthoring authoring)
+            public override void Bake(ParticleAuthoringV2 authoringV2)
             {
-                var e = GetEntity(authoring, TransformUsageFlags.Dynamic);
-                AddComponent(e, new Bounds { Min = authoring.BoxMin, Max = authoring.BoxMax });
+                var e = GetEntity(authoringV2, TransformUsageFlags.Dynamic);
+                AddComponent(e, new Bounds { Min = authoringV2.BoxMin, Max = authoringV2.BoxMax });
                 
-                AddComponent(e, new SpawnConfig
+                AddComponent(e, new SpawnConfigV2
                 {
-                    Prefab = GetEntity(authoring.ParticlePrefab, TransformUsageFlags.Renderable),
-                    Count = authoring.Count,
-                    SpeedRange = new float2(authoring.SpeedMin, authoring.SpeedMax)
+                    Prefab = GetEntity(authoringV2.ParticlePrefab, TransformUsageFlags.Renderable),
+                    Count = authoringV2.Count,
+                    SpeedRange = new float2(authoringV2.SpeedMin, authoringV2.SpeedMax)
                 });;
             }
         }
     }
 }
 
-public struct SpawnConfig : IComponentData
+public struct SpawnConfigV2 : IComponentData
 {
     public Entity Prefab;
     public int Count;

@@ -1,4 +1,6 @@
-﻿using Unity.Entities;
+﻿using Exercises.ParticleBoxV2.Scripts.Aspect;
+using Unity.Entities;
+using Unity.Mathematics;
 using Unity.Transforms;
 
 namespace Exercises.ParticleBoxV2.Scripts
@@ -7,9 +9,10 @@ namespace Exercises.ParticleBoxV2.Scripts
     {
         public float dt;
         public Bounds Bounds;
-        public void Execute(ref LocalTransform t, ref Velocity vel, in ParticleTag tag)
+        public void Execute(ParticleAspect aspect)
         {
-
+            aspect.Integrate(dt);
+            aspect.Bounce(in Bounds);
         }
     }
 }
